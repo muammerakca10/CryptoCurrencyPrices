@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		459D0F2828C8B62B00972713 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D0F2728C8B62B00972713 /* Crypto.swift */; };
+		459D0F2A28C8B6A200972713 /* Cryptos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D0F2928C8B6A200972713 /* Cryptos.swift */; };
 		45DDB7AD28C739AA006F442A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDB7AC28C739AA006F442A /* AppDelegate.swift */; };
 		45DDB7AF28C739AA006F442A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDB7AE28C739AA006F442A /* SceneDelegate.swift */; };
 		45DDB7B128C739AA006F442A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDB7B028C739AA006F442A /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		459D0F2728C8B62B00972713 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		459D0F2928C8B6A200972713 /* Cryptos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptos.swift; sourceTree = "<group>"; };
 		45DDB7A928C739AA006F442A /* CryptoCurrentPrices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoCurrentPrices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DDB7AC28C739AA006F442A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45DDB7AE28C739AA006F442A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 				45DDB7AC28C739AA006F442A /* AppDelegate.swift */,
 				45DDB7AE28C739AA006F442A /* SceneDelegate.swift */,
 				45DDB7B028C739AA006F442A /* ViewController.swift */,
+				459D0F2728C8B62B00972713 /* Crypto.swift */,
+				459D0F2928C8B6A200972713 /* Cryptos.swift */,
 				45DDB7B228C739AA006F442A /* Main.storyboard */,
 				45DDB7C028C73C06006F442A /* CryptoCell.swift */,
 				45DDB7B528C739B5006F442A /* Assets.xcassets */,
@@ -143,6 +149,8 @@
 			files = (
 				45DDB7B128C739AA006F442A /* ViewController.swift in Sources */,
 				45DDB7C128C73C06006F442A /* CryptoCell.swift in Sources */,
+				459D0F2A28C8B6A200972713 /* Cryptos.swift in Sources */,
+				459D0F2828C8B62B00972713 /* Crypto.swift in Sources */,
 				45DDB7AD28C739AA006F442A /* AppDelegate.swift in Sources */,
 				45DDB7AF28C739AA006F442A /* SceneDelegate.swift in Sources */,
 			);

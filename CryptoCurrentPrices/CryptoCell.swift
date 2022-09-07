@@ -8,7 +8,14 @@
 import UIKit
 
 class CryptoCell: UITableViewCell {
+    
+    
 
+    @IBOutlet var symbolText: UILabel!
+    @IBOutlet var priceText: UILabel!
+    @IBOutlet var favButton: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

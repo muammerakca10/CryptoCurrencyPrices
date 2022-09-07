@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bn5-6r-vkq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -7,22 +7,55 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--View Controller-->
         <scene sceneID="c3V-Lp-D7b">
             <objects>
-                <tableViewController id="HGx-j1-a9t" sceneMemberID="viewController">
+                <tableViewController id="HGx-j1-a9t" customClass="ViewController" customModule="CryptoCurrentPrices" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="40F-kU-qyV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qdd-K3-8pg">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="qdd-K3-8pg" customClass="CryptoCell" customModule="CryptoCurrentPrices" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qdd-K3-8pg" id="C1A-OV-yRc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-6I-gUZ">
+                                            <rect key="frame" x="20" y="11" width="55" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9E-AS-492">
+                                            <rect key="frame" x="279.5" y="10" width="38.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8A-Nug">
+                                            <rect key="frame" x="358" y="7" width="47" height="31"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="j3U-6I-gUZ" firstAttribute="baseline" secondItem="Edc-8A-Nug" secondAttribute="baseline" id="2CG-EI-ne6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Edc-8A-Nug" secondAttribute="trailing" constant="-11" id="AF7-fW-OgE"/>
+                                        <constraint firstItem="N9E-AS-492" firstAttribute="top" secondItem="C1A-OV-yRc" secondAttribute="topMargin" constant="-1" id="Ar6-oo-nbY"/>
+                                        <constraint firstItem="Edc-8A-Nug" firstAttribute="leading" secondItem="N9E-AS-492" secondAttribute="trailing" constant="40" id="Ise-Vq-wMO"/>
+                                        <constraint firstItem="j3U-6I-gUZ" firstAttribute="top" secondItem="C1A-OV-yRc" secondAttribute="topMargin" id="OnH-K4-MwQ"/>
+                                        <constraint firstItem="j3U-6I-gUZ" firstAttribute="centerY" secondItem="C1A-OV-yRc" secondAttribute="centerY" id="dJm-ut-3bt"/>
+                                        <constraint firstItem="j3U-6I-gUZ" firstAttribute="leading" secondItem="C1A-OV-yRc" secondAttribute="leadingMargin" id="ejU-0V-ZlX"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="favButton" destination="Edc-8A-Nug" id="Eck-kr-YYp"/>
+                                    <outlet property="priceText" destination="N9E-AS-492" id="PRJ-fN-cnX"/>
+                                    <outlet property="symbolText" destination="j3U-6I-gUZ" id="x5X-JW-g06"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -30,13 +63,51 @@
                             <outlet property="delegate" destination="HGx-j1-a9t" id="6d1-Ib-aDG"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="hk7-ZF-6dT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0e-ED-1Fy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154" y="-423"/>
+            <point key="canvasLocation" x="1665.217391304348" y="-423.21428571428572"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Dhd-vH-Twz">
+            <objects>
+                <navigationController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="4xp-Ho-SEW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="IWZ-iq-Vdg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q5I-qP-Scr">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HGx-j1-a9t" kind="relationship" relationship="rootViewController" id="lP2-K6-nOB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lli-b4-O9j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="755.07246376811599" y="-423.21428571428572"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="xMc-mT-uO6">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bn5-6r-vkq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="a9i-Wb-SXH">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="4xp-Ho-SEW" kind="relationship" relationship="viewControllers" id="8tH-FZ-e1r"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eFu-Mi-wX5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-155.07246376811597" y="-423.21428571428572"/>
         </scene>
     </scenes>
     <resources>
+        <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
