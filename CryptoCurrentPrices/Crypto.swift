@@ -11,5 +11,5 @@ struct Crypto : Codable {
     
     var symbol : String
     var price : String
-    var time : CLong
+    var time : Int64
 }

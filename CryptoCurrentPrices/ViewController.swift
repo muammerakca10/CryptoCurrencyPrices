@@ -21,13 +21,14 @@ class ViewController: UITableViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             if let url = URL(string: urlString){
                 if let data = try? Data(contentsOf: url){
+                    print("asdf")
                     self.parse(json: data)
                 } else {
                     self.showError()
                 }
             }
         }
-        
+        //print(cryptosArray)
         
     }
     
@@ -53,9 +54,9 @@ class ViewController: UITableViewController {
     func parse(json: Data){
         let decoder = JSONDecoder()
         
-        if let jsonCryptos = try? decoder.decode(Cryptos.self, from: json) {
-            cryptosArray = jsonCryptos.results
-            //print(cryptosArray)
+        if let jsonCryptos = try? decoder.decode([Crypto].self, from: json) {
+            cryptosArray = jsonCryptos
+            print(jsonCryptos)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
