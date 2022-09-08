@@ -7,14 +7,20 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UITableViewController, UISearchBarDelegate {
+    
+    @IBOutlet var searchBar: UISearchBar!
     
     var cryptosArray = [Crypto]()
     
-    var favCryptosArray = [Crypto]()
+    var filteredCryptosArray = [Crypto]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        searchBar.delegate = self
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonTapped))
         
@@ -30,6 +36,7 @@ class ViewController: UITableViewController {
                 }
             }
         }
+        
     }
     
     @objc func refreshButtonTapped(){
@@ -53,13 +60,13 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CryptoCell
-        cell.symbolText!.text = cryptosArray[indexPath.row].symbol
-        cell.priceText!.text = cryptosArray[indexPath.row].price
+        cell.symbolText!.text = filteredCryptosArray[indexPath.row].symbol
+        cell.priceText!.text = filteredCryptosArray[indexPath.row].price
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cryptosArray.count
+        return filteredCryptosArray.count
     }
     
     func showError () {
@@ -76,11 +83,29 @@ class ViewController: UITableViewController {
         if let jsonCryptos = try? decoder.decode([Crypto].self, from: json) {
             cryptosArray = jsonCryptos
             cryptosArray.sort{$0.symbol < $1.symbol}
+            filteredCryptosArray = cryptosArray
             print(jsonCryptos)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("hello")
+        
+        filteredCryptosArray = []
+        
+        if searchText == ""{
+            filteredCryptosArray = cryptosArray
+        }
+        for word in cryptosArray {
+            if word.symbol.lowercased().contains(searchText.lowercased()){
+                filteredCryptosArray.append(word)
+                
+            }
+        }
+        self.tableView.reloadData()
     }
 }
 
