@@ -16,6 +16,8 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonTapped))
+        
         let urlString = "https://fapi.binance.com/fapi/v1/ticker/price"
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -28,8 +30,25 @@ class ViewController: UITableViewController {
                 }
             }
         }
-        //print(cryptosArray)
+    }
+    
+    @objc func refreshButtonTapped(){
         
+        let urlString = "https://fapi.binance.com/fapi/v1/ticker/price"
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let url = URL(string: urlString){
+                if let data = try? Data(contentsOf: url){
+                    print("asdf")
+                    self.parse(json: data)
+                } else {
+                    self.showError()
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,13 +75,12 @@ class ViewController: UITableViewController {
         
         if let jsonCryptos = try? decoder.decode([Crypto].self, from: json) {
             cryptosArray = jsonCryptos
+            cryptosArray.sort{$0.symbol < $1.symbol}
             print(jsonCryptos)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
-    
-    
 }
 
