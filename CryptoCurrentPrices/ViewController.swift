@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UITableViewController, UISearchBarDelegate, FavoriteButtonProtocol {
     
+    var timer = Timer()
     
     @IBOutlet var searchBar: UISearchBar!
     
@@ -22,9 +23,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, FavoriteButton
         searchBar.delegate = self
         
         self.tabBarController?.tabBar.items![0].image = UIImage(systemName: "house")
-
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonTapped))
         
         let urlString = "https://fapi.binance.com/fapi/v1/ticker/price"
         
@@ -37,24 +35,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, FavoriteButton
                 }
             }
         }
-    }
-    
-    @objc func refreshButtonTapped(){
-        
-        let urlString = "https://fapi.binance.com/fapi/v1/ticker/price"
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let url = URL(string: urlString){
-                if let data = try? Data(contentsOf: url){
-                    self.parse(json: data)
-                } else {
-                    self.showError()
-                }
-            }
-        }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        scheduledTimerWithTimeInterval()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -107,7 +88,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, FavoriteButton
         for word in cryptosArray {
             if word.symbol.uppercased().contains(searchText.uppercased()){
                 filteredCryptosArray.append(word)
-                
             }
         }
         self.tableView.reloadData()
@@ -117,21 +97,32 @@ class ViewController: UITableViewController, UISearchBarDelegate, FavoriteButton
         print("Button clicked \(indexPath.item)")
         
         if sender.imageView?.image == UIImage(systemName: "star"){
-        sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else if sender.imageView?.image == UIImage(systemName: "star.fill") {
             sender.setImage(UIImage(systemName: "star"), for: .normal)
         }
+    }
+    
+    func scheduledTimerWithTimeInterval(){
+        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateCounting(){
+        let urlString = "https://fapi.binance.com/fapi/v1/ticker/price"
         
-        //self.tableView.reloadData()
-    }
-    /*
-    @objc func favButtonTapped(sender: UIButton){
-        if sender.imageView?.image == UIImage(systemName: "star"){
-        sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        } else if sender.imageView?.image == UIImage(systemName: "star.fill") {
-            sender.setImage(UIImage(systemName: "star"), for: .normal)
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let url = URL(string: urlString){
+                if let data = try? Data(contentsOf: url){
+                    self.parse(json: data)
+                } else {
+                    self.showError()
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
-    */
     
 }
