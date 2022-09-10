@@ -14,16 +14,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        
+        
         if let tabBarController = window?.rootViewController as? UITabBarController{
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "NavController")
             
-            vc.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 1)
+            vc.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
             tabBarController.viewControllers?.append(vc)
             
             guard let _ = (scene as? UIWindowScene) else { return }
         }
+        
+        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
